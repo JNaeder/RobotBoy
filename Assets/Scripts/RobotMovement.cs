@@ -16,21 +16,23 @@ public class RobotMovement : MonoBehaviour
     Vector3 startBodyPos, startHeadPos;
 
     Camera cam;
+    Rigidbody2D rB;
+    public Trajectory trajectory;
 
 
     public Rigidbody2D headRB;
-    public GameObject arrowObject;
 
     private void Start()
     {
         cam = Camera.main;
+        rB = GetComponent<Rigidbody2D>();
+
         startBodyPos = bodyTrans.localPosition;
         startHeadPos = headTrans.localPosition;
-        arrowObject.SetActive(false);
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
 
 
@@ -55,6 +57,7 @@ public class RobotMovement : MonoBehaviour
         {
             currentRobotState = RobotState.throwing;
             startMousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            trajectory.Show();
         }
     }
 
@@ -63,11 +66,9 @@ public class RobotMovement : MonoBehaviour
             //Debug.Log("Holding");
             currentMousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
-            arrowObject.SetActive(true);
-            Vector3 diff = startMousePos - currentMousePos;
-            float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-            arrowObject.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
 
+            Debug.DrawLine(startMousePos, currentMousePos);
+            trajectory.UpdateDots(headTrans.position, (startMousePos - currentMousePos));
         }
 
         if (Input.GetMouseButtonUp(0)) {
@@ -107,17 +108,19 @@ public class RobotMovement : MonoBehaviour
     void ThrowHead() {
         //Debug.Log("Throw");
 
-        arrowObject.SetActive(false);
+        trajectory.Hide();
         Vector3 throwVector = startMousePos - currentMousePos;
         headRB.bodyType = RigidbodyType2D.Dynamic;
-        headRB.AddForce(throwVector * throwPower);
+        headRB.AddForce(throwVector * throwPower, ForceMode2D.Impulse);
         //Debug.Log(throwVector);
 
     }
 
     void Teleport() {
         //Debug.Log("Teleport!");
-       
+
+        rB.velocity = headRB.velocity;
+
         headRB.bodyType = RigidbodyType2D.Kinematic;
         headRB.velocity = Vector2.zero;
         transform.position = headTrans.position;
