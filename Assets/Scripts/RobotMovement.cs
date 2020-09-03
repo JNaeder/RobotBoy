@@ -14,6 +14,7 @@ public class RobotMovement : MonoBehaviour
     Vector3 startMousePos, currentMousePos;
     public Transform bodyTrans, headTrans;
     Vector3 startBodyPos, startHeadPos;
+    Vector2 throwVector;
 
     Camera cam;
     Rigidbody2D rB;
@@ -21,6 +22,7 @@ public class RobotMovement : MonoBehaviour
 
 
     public Rigidbody2D headRB;
+    public float trajectoryMin, trajectoryMax;
 
     private void Start()
     {
@@ -57,7 +59,7 @@ public class RobotMovement : MonoBehaviour
         {
             currentRobotState = RobotState.throwing;
             startMousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            trajectory.Show();
+            
         }
     }
 
@@ -68,12 +70,19 @@ public class RobotMovement : MonoBehaviour
 
 
             Debug.DrawLine(startMousePos, currentMousePos);
-            trajectory.UpdateDots(headTrans.position, (startMousePos - currentMousePos));
+
+            
+            throwVector = startMousePos - currentMousePos;
+            if (throwVector.magnitude > trajectoryMin)
+            {
+                trajectory.Show();
+                trajectory.UpdateDots(headTrans.position, throwVector);
+            }
         }
 
         if (Input.GetMouseButtonUp(0)) {
 
-            ThrowHead();
+            ThrowHead(throwVector);
 
             currentRobotState = RobotState.detached;
         }
@@ -105,11 +114,10 @@ public class RobotMovement : MonoBehaviour
     }
 
 
-    void ThrowHead() {
+    void ThrowHead(Vector2 throwVector) {
         //Debug.Log("Throw");
 
         trajectory.Hide();
-        Vector3 throwVector = startMousePos - currentMousePos;
         headRB.bodyType = RigidbodyType2D.Dynamic;
         headRB.AddForce(throwVector * throwPower, ForceMode2D.Impulse);
         //Debug.Log(throwVector);
