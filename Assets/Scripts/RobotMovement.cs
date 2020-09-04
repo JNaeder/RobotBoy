@@ -4,31 +4,39 @@ using UnityEngine;
 
 public class RobotMovement : MonoBehaviour
 {
+    //----Player Stats----
+    //
+    // How fast Player moves left and right
     public float movementSpeed = 3f;
-    public float throwPower = 50f;
+    // Transform of the body and the head
+    public Transform bodyTrans, headTrans;
+    // The rigidbody of the head
+    public Rigidbody2D headRB;
+    // Min and Max Trajectory Magnitudes
+    public float trajectoryMin, trajectoryMax;
 
+    // Different States Of the Throwing Mechanic
     public enum RobotState {moving, throwing, detached, teleporting}
     public RobotState currentRobotState = RobotState.moving;
 
-
+    //Init positions of mouse and player
     Vector3 startMousePos, currentMousePos;
-    public Transform bodyTrans, headTrans;
     Vector3 startBodyPos, startHeadPos;
     Vector2 throwVector;
 
+    // refrences to camera and player Rigidbody
     Camera cam;
     Rigidbody2D rB;
+
+    //effect prefabs
     public Trajectory trajectory;
-
-
-    public Rigidbody2D headRB;
-    public float trajectoryMin, trajectoryMax;
+    public GameObject teleportPS;
 
     private void Start()
     {
+        //Set up all these things
         cam = Camera.main;
         rB = GetComponent<Rigidbody2D>();
-
         startBodyPos = bodyTrans.localPosition;
         startHeadPos = headTrans.localPosition;
 
@@ -37,7 +45,7 @@ public class RobotMovement : MonoBehaviour
     private void Update()
     {
 
-
+        // Control the states of the Robot
         if (currentRobotState == RobotState.moving)
         {
             Movement();
@@ -50,7 +58,7 @@ public class RobotMovement : MonoBehaviour
         }
     }
 
-
+    //Moving Left And Right
     void Movement() {
         float h = Input.GetAxis("Horizontal");
         transform.position += new Vector3(h, 0, 0) * movementSpeed * Time.deltaTime;
@@ -58,32 +66,35 @@ public class RobotMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             currentRobotState = RobotState.throwing;
+            // Get the start mouse position
             startMousePos = cam.ScreenToWorldPoint(Input.mousePosition);
             
         }
     }
 
+    //Throwing State
     void Throwing() {
         if (Input.GetMouseButton(0)) {
-            //Debug.Log("Holding");
+            // Get the current mouse position and keep updating it
             currentMousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
+            // Clamping the throw vector to the maximum trajectory
+            throwVector = Vector3.ClampMagnitude(startMousePos - currentMousePos, trajectoryMax);
 
-            Debug.DrawLine(startMousePos, currentMousePos);
-
-            
-            throwVector = startMousePos - currentMousePos;
+            // hiding the trajectory if magnitude is under mimimum trajectory
             if (throwVector.magnitude > trajectoryMin)
             {
                 trajectory.Show();
                 trajectory.UpdateDots(headTrans.position, throwVector);
             }
+
+            
         }
 
         if (Input.GetMouseButtonUp(0)) {
 
+            // Throw the head and change state to detached
             ThrowHead(throwVector);
-
             currentRobotState = RobotState.detached;
         }
     }
@@ -91,6 +102,7 @@ public class RobotMovement : MonoBehaviour
     IEnumerator Detached() {
         if (Input.GetMouseButtonDown(0))
         {
+            headTrans.parent = transform;
 
             Teleport();
 
@@ -101,7 +113,7 @@ public class RobotMovement : MonoBehaviour
             currentRobotState = RobotState.moving;
         }
         else if (Input.GetMouseButtonDown(1)) {
-
+            headTrans.parent = transform;
             Reset();
             currentRobotState = RobotState.teleporting;
 
@@ -115,38 +127,59 @@ public class RobotMovement : MonoBehaviour
 
 
     void ThrowHead(Vector2 throwVector) {
-        //Debug.Log("Throw");
-
+        //Hide the trajectory efefct, and throw the head. Use the throw vector to throw the head in that direction. Remove it from the parent transform
         trajectory.Hide();
         headRB.bodyType = RigidbodyType2D.Dynamic;
-        headRB.AddForce(throwVector * throwPower, ForceMode2D.Impulse);
-        //Debug.Log(throwVector);
+        headRB.AddForce(throwVector, ForceMode2D.Impulse);
+        headTrans.parent = null;
 
     }
 
     void Teleport() {
-        //Debug.Log("Teleport!");
+        //Use half of the heads velocity
+        rB.velocity = headRB.velocity / 2;
 
-        rB.velocity = headRB.velocity;
+        // Play the particle system for teleporting. And delete it once it's finished playing.
+        GameObject pS = Instantiate(teleportPS,headTrans.position, Quaternion.identity) as GameObject;
+        Destroy(pS, pS.GetComponent<ParticleSystem>().main.duration);
 
+        // Reset the head and put it back on the body once teleporting has finished
         headRB.bodyType = RigidbodyType2D.Kinematic;
         headRB.velocity = Vector2.zero;
         transform.position = headTrans.position;
         bodyTrans.localPosition = startBodyPos;
         headTrans.localPosition = startHeadPos;
         
+        
 
     }
 
     void Reset() {
-        //Debug.Log("Reset");
-
+        // Reset the head back to the body. "Undo"
         headRB.bodyType = RigidbodyType2D.Kinematic;
         headRB.velocity = Vector2.zero;
         bodyTrans.localPosition = startBodyPos;
         headTrans.localPosition = startHeadPos;
 
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        // Set it so player follows horizontal platforms. By Setting the parent
+        if (collision.gameObject.tag == "Horizontal Platform") {
+            transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // setting the parent back to null after player leaves platform
+        if (collision.gameObject.tag == "Horizontal Platform") {
+            transform.parent = null;
+
+        }
     }
 
 
