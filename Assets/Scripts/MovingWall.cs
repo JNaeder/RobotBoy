@@ -11,9 +11,10 @@ public class MovingWall : MonoBehaviour
     public float moveSpeed;
     public Transform endPointMax, endPointMin;
     public bool movingToMax;
+    public Transform parentPoint;
 
-
-    float sizeOfWall;
+    [HideInInspector]
+    public float sizeOfWall;
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +63,10 @@ public class MovingWall : MonoBehaviour
 
     void MoveWallUp() {
         wallObject.transform.position += Vector3.up * moveSpeed * Time.deltaTime;
+        if (movingDirection == MovingDirection.horizontal)
+        {
+            parentPoint.transform.position += Vector3.up * moveSpeed * Time.deltaTime;
+        }
 
         if (wallObject.transform.position.y >= endPointMax.position.y - sizeOfWall) {
             movingToMax = false;
@@ -74,6 +79,11 @@ public class MovingWall : MonoBehaviour
     void MoveWallDown()
     {
         wallObject.transform.position -= Vector3.up * moveSpeed * Time.deltaTime;
+        if (movingDirection == MovingDirection.horizontal)
+        {
+            parentPoint.transform.position -= Vector3.up * moveSpeed * Time.deltaTime;
+        }
+
         if (wallObject.transform.position.y <= endPointMin.position.y + sizeOfWall)
         {
             movingToMax = true;
@@ -84,6 +94,10 @@ public class MovingWall : MonoBehaviour
 
     void MoveWallRight() {
         wallObject.transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+        if (movingDirection == MovingDirection.horizontal)
+        {
+            parentPoint.transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+        }
 
         if (wallObject.transform.position.x >= endPointMax.position.x - sizeOfWall)
         {
@@ -94,6 +108,11 @@ public class MovingWall : MonoBehaviour
 
     void MoveWallLeft() {
         wallObject.transform.position -= Vector3.right * moveSpeed * Time.deltaTime;
+        if (movingDirection == MovingDirection.horizontal)
+        {
+            parentPoint.transform.position -= Vector3.right * moveSpeed * Time.deltaTime;
+        }
+
         if (wallObject.transform.position.x <= endPointMin.position.x + sizeOfWall)
         {
             movingToMax = true;

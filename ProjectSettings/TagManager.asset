@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Horizontal Platform
+  - TheSquisher
+  - ElectricWalls
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - 
   - Robot
   - Horizontal Platform
-  - 
+  - Robot Head
   - 
   - 
   - 
@@ -39,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3068516125
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
