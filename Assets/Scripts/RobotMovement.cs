@@ -97,6 +97,13 @@ public class RobotMovement : MonoBehaviour
             ThrowHead(throwVector);
             currentRobotState = RobotState.detached;
         }
+
+
+        if (Input.GetMouseButtonDown(1)) {
+            currentRobotState = RobotState.moving;
+            trajectory.Hide();
+
+        }
     }
 
     IEnumerator Detached() {
@@ -137,7 +144,7 @@ public class RobotMovement : MonoBehaviour
 
     void Teleport() {
         //Use half of the heads velocity
-        rB.velocity = headRB.velocity / 2;
+        rB.velocity = headRB.velocity * 0.75f;
 
         // Play the particle system for teleporting. And delete it once it's finished playing.
         GameObject pS = Instantiate(teleportPS,headTrans.position, Quaternion.identity) as GameObject;
@@ -180,6 +187,14 @@ public class RobotMovement : MonoBehaviour
             transform.parent = null;
 
         }
+    }
+
+
+    public void Die()
+    {
+        Debug.Log("Die!");
+
+
     }
 
 

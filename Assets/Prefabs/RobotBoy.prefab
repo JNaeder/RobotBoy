@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2189253096786617730}
   m_Layer: 8
   m_Name: RobotBoy
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,15 +94,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef7413305f43471f951a473bca97728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
-  throwPower: 1
-  currentRobotState: 0
+  movementSpeed: 5
   bodyTrans: {fileID: 2189253097930170046}
   headTrans: {fileID: 2189253097184011718}
-  trajectory: {fileID: 0}
   headRB: {fileID: 2189253097184011716}
-  trajectoryMin: 0
-  trajectoryMax: 0
+  trajectoryMin: 2
+  trajectoryMax: 15
+  currentRobotState: 0
+  trajectory: {fileID: 0}
+  teleportPS: {fileID: 7476835727027931590, guid: ecea1268266a94aad82cd85ddabc2720, type: 3}
 --- !u!1 &2189253097184011719
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 2189253097184011715}
   m_Layer: 8
   m_Name: HeadSprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 2189253097930170045}
   m_Layer: 8
   m_Name: BodySprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
