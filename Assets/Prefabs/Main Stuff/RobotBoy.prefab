@@ -51,7 +51,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ee7ea7a769c3bbb4a8eec64414bfb877, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 2189253096786617733}
   - component: {fileID: 2189253096786617730}
   - component: {fileID: 1801283104}
+  - component: {fileID: 1043939413}
   m_Layer: 8
   m_Name: RobotBoy
   m_TagString: Player
@@ -184,13 +185,13 @@ MonoBehaviour:
   headTrans: {fileID: 2189253097184011718}
   headParent: {fileID: 4367411359280348057}
   armSprite: {fileID: 678341745}
+  headHolder: {fileID: 6647830456269859801}
   headRB: {fileID: 2189253097184011716}
   trajectoryMin: 2
   trajectoryMax: 15
   maxTeleportPower: 10
   currentTeleportPower: 0
   teleportRechargeRate: 5
-  testFloat: 180
   currentRobotState: 0
   trajectory: {fileID: 0}
   teleportPS: {fileID: 7476835727027931590, guid: ecea1268266a94aad82cd85ddabc2720, type: 3}
@@ -213,6 +214,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1043939413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189253096786617734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2168cf8300ec46f418a99c1088d70376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2189253097184011719
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +238,8 @@ GameObject:
   - component: {fileID: 2189253097184011717}
   - component: {fileID: 2189253097184011716}
   - component: {fileID: 2189253097184011715}
-  m_Layer: 8
+  - component: {fileID: 736471075}
+  m_Layer: 10
   m_Name: HeadSprite
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -265,7 +279,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ee7ea7a769c3bbb4a8eec64414bfb877, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -334,6 +348,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.44
+--- !u!114 &736471075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189253097184011719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2168cf8300ec46f418a99c1088d70376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2189253097930170047
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +410,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ee7ea7a769c3bbb4a8eec64414bfb877, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -440,7 +466,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2964394162063006212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.472, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 678341745}

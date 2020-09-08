@@ -22,6 +22,9 @@ public class RobotMovement : MonoBehaviour
     [Range(1, 20)]
     public float teleportRechargeRate = 1;
 
+    public Transform floorCheck;
+    public LayerMask conveyerBeltMask;
+
 
     // Different States Of the Throwing Mechanic
     public enum RobotState {moving, throwing, detached, teleporting}
@@ -78,7 +81,7 @@ public class RobotMovement : MonoBehaviour
         //Recharge the teleport Power
         RechargeTeleportPower();
 
-
+        CheckForFloorType();
         
 
     }
@@ -271,15 +274,19 @@ public class RobotMovement : MonoBehaviour
 
     }
 
-    void SetThrowingArmAngle(Vector3 currentMousePos) {
+    void SetThrowingArmAngle(Vector3 currentMousePos)
+    {
         Vector3 diff = startMousePos - currentMousePos;
         float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
         if (diff.x > 0)
         {
             armSprite.localRotation = Quaternion.Euler(new Vector3(0, 0, angle + 180));
+            transform.localScale = new Vector3(1, 1, 1);
         }
-        else if (diff.x < 0) {
-            armSprite.localRotation = Quaternion.Euler(new Vector3(0, 0, angle +90));
+        else if (diff.x < 0)
+        {
+            armSprite.localRotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
@@ -288,6 +295,14 @@ public class RobotMovement : MonoBehaviour
         headTrans.localRotation = Quaternion.Euler(Vector3.zero);
         headTrans.localPosition = startHeadPos;
         armSprite.localRotation = Quaternion.Euler(Vector3.zero);
+
+    }
+
+    void CheckForFloorType() {
+        if (Physics2D.OverlapCircle(floorCheck.position, 0.5f, conveyerBeltMask)) {
+            Debug.Log("Hey");
+
+        }
 
     }
 
