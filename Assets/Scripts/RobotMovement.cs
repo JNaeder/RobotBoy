@@ -22,9 +22,6 @@ public class RobotMovement : MonoBehaviour
     [Range(1, 20)]
     public float teleportRechargeRate = 1;
 
-    public Transform floorCheck;
-    public LayerMask conveyerBeltMask;
-
 
     // Different States Of the Throwing Mechanic
     public enum RobotState {moving, throwing, detached, teleporting}
@@ -80,8 +77,7 @@ public class RobotMovement : MonoBehaviour
 
         //Recharge the teleport Power
         RechargeTeleportPower();
-
-        CheckForFloorType();
+        
         
 
     }
@@ -298,13 +294,7 @@ public class RobotMovement : MonoBehaviour
 
     }
 
-    void CheckForFloorType() {
-        if (Physics2D.OverlapCircle(floorCheck.position, 0.5f, conveyerBeltMask)) {
-            Debug.Log("Hey");
-
-        }
-
-    }
+    
 
     public void Die(DeathMethod theDeathMethod)
     {
