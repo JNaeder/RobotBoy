@@ -29,11 +29,6 @@ public class Trajectory : MonoBehaviour
         PreparePixels();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void PreparePixels() {
         pixelList = new Transform[pixelNum];

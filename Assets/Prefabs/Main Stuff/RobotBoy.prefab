@@ -124,8 +124,8 @@ GameObject:
   - component: {fileID: 2189253096786617731}
   - component: {fileID: 2189253096786617732}
   - component: {fileID: 2189253096786617733}
-  - component: {fileID: 2189253096786617730}
   - component: {fileID: 1801283104}
+  - component: {fileID: 2189253096786617730}
   - component: {fileID: 1043939413}
   - component: {fileID: 8726688372924577837}
   m_Layer: 8
@@ -200,6 +200,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &1801283104
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189253096786617734}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b1e86ddfc92167945bc99b2672289ff6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2189253096786617730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,25 +246,6 @@ MonoBehaviour:
   currentRobotState: 0
   trajectory: {fileID: 0}
   teleportPS: {fileID: 7476835727027931590, guid: ecea1268266a94aad82cd85ddabc2720, type: 3}
---- !u!95 &1801283104
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2189253096786617734}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b1e86ddfc92167945bc99b2672289ff6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1043939413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +270,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562d86a11aa4a9940a8960e2b360ae15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorPoint: {fileID: 0}
+  floorMask:
+    serializedVersion: 2
+    m_Bits: 0
+  floorCheckRadius: 0.5
 --- !u!1 &2189253097184011719
 GameObject:
   m_ObjectHideFlags: 0

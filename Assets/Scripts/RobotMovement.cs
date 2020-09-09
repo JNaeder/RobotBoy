@@ -124,7 +124,8 @@ public class RobotMovement : MonoBehaviour
 
             //Set Arm rotation
             SetThrowingArmAngle(currentMousePos);
-            
+
+            // Set the head onto the arm for throwing
             headTrans.parent = headHolder;
             headTrans.localRotation = Quaternion.Euler(new Vector3(0, 0, -180));
             headTrans.localPosition = new Vector3(0, -0.4f, 0);
@@ -154,6 +155,7 @@ public class RobotMovement : MonoBehaviour
 
 
         if (Input.GetMouseButtonDown(1)) {
+            //Cancel the throwing, and go back to normal moving
             currentRobotState = RobotState.moving;
             trajectory.Hide();
 
@@ -180,6 +182,7 @@ public class RobotMovement : MonoBehaviour
                 currentRobotState = RobotState.moving;
             }
         }
+        // Reset back to body position. "Redo"
         else if (Input.GetMouseButtonDown(1)) {
             headTrans.parent = transform;
             Reset();
@@ -240,26 +243,6 @@ public class RobotMovement : MonoBehaviour
         headTrans.rotation = Quaternion.Euler(Vector3.zero);
 
 
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-        // Set it so player follows horizontal platforms. By Setting the parent
-        if (collision.gameObject.tag == "Horizontal Platform") {
-            MovingWall movewall = collision.gameObject.GetComponentInParent<MovingWall>();
-            transform.parent = movewall.parentPoint;
-        }
-        
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        // setting the parent back to null after player leaves platform
-        if (collision.gameObject.tag == "Horizontal Platform") {
-            transform.parent = null;
-
-        }
     }
 
     // Increasing the teleport power back to max. Over recharge rate time

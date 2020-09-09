@@ -10,7 +10,7 @@ public class DeathDetector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        robotPlayer = GetComponentInParent<RobotMovement>();
+        robotPlayer = GetComponent<RobotMovement>();
     }
 
 

@@ -59,6 +59,12 @@ public class MovingWall : MonoBehaviour
 
     }
 
+    void MoveWall(Vector3 direction, Transform endPoint) {
+
+
+
+    }
+
     
 
     void MoveWallUp() {
