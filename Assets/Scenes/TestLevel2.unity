@@ -256,11 +256,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &455368216 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2189253096786617731, guid: 5d51aa034520e40f1bab00814a3f75eb, type: 3}
-  m_PrefabInstance: {fileID: 1322425347}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &675026709
 GameObject:
   m_ObjectHideFlags: 0
@@ -3034,36 +3029,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29c89f4bb4384ec41ab171a582bc5f12, type: 3}
---- !u!1 &983739128
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 983739129}
-  m_Layer: 8
-  m_Name: FloorCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &983739129
+--- !u!4 &983739129 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 983739129, guid: 5d51aa034520e40f1bab00814a3f75eb, type: 3}
+  m_PrefabInstance: {fileID: 1322425347}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 983739128}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 455368216}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1322425347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3075,14 +3045,6 @@ PrefabInstance:
       propertyPath: trajectory
       value: 
       objectReference: {fileID: 1550019606}
-    - target: {fileID: 2189253096786617730, guid: 5d51aa034520e40f1bab00814a3f75eb, type: 3}
-      propertyPath: floorCheck
-      value: 
-      objectReference: {fileID: 983739129}
-    - target: {fileID: 2189253096786617730, guid: 5d51aa034520e40f1bab00814a3f75eb, type: 3}
-      propertyPath: conveyerBeltMask.m_Bits
-      value: 2048
-      objectReference: {fileID: 0}
     - target: {fileID: 2189253096786617731, guid: 5d51aa034520e40f1bab00814a3f75eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.08
@@ -3127,14 +3089,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2189253096786617733, guid: 5d51aa034520e40f1bab00814a3f75eb, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 2189253096786617734, guid: 5d51aa034520e40f1bab00814a3f75eb, type: 3}
       propertyPath: m_Name
       value: RobotBoy
       objectReference: {fileID: 0}
+    - target: {fileID: 8726688372924577837, guid: 5d51aa034520e40f1bab00814a3f75eb, type: 3}
+      propertyPath: conveyerBeltMask.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 8726688372924577837, guid: 5d51aa034520e40f1bab00814a3f75eb, type: 3}
+      propertyPath: floorPoint
+      value: 
+      objectReference: {fileID: 983739129}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d51aa034520e40f1bab00814a3f75eb, type: 3}
 --- !u!4 &1403538722 stripped
@@ -3293,8 +3259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AssetsPPU: 16
-  m_RefResolutionX: 320
-  m_RefResolutionY: 180
+  m_RefResolutionX: 656
+  m_RefResolutionY: 357
   m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 0
