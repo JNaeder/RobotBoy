@@ -22,6 +22,8 @@ public class RobotMovement : MonoBehaviour
     [Range(1, 20)]
     public float teleportRechargeRate = 1;
 
+    public LayerMask headLayer;
+
 
     // Different States Of the Throwing Mechanic
     public enum RobotState {moving, throwing, detached, teleporting}
@@ -73,6 +75,7 @@ public class RobotMovement : MonoBehaviour
         }
         else if (currentRobotState == RobotState.detached) {
             StartCoroutine(Detached());
+            Movement();
         }
 
         //Recharge the teleport Power
@@ -160,12 +163,17 @@ public class RobotMovement : MonoBehaviour
             trajectory.Hide();
 
             ResetArmPosition();
+            ResetHeadPosition();
             
 
         }
     }
 
     IEnumerator Detached() {
+        yield return new WaitForSeconds(0.5f);
+        CheckForHead();
+
+
         if (Input.GetMouseButtonDown(0))
         {
             //Check if teleport power has recharged. Can't teleport unless it's charged.
@@ -270,10 +278,24 @@ public class RobotMovement : MonoBehaviour
     }
 
     void ResetArmPosition() {
+        
+        armSprite.localRotation = Quaternion.Euler(Vector3.zero);
+
+    }
+    void ResetHeadPosition() {
+        headRB.bodyType = RigidbodyType2D.Kinematic;
+        headRB.velocity = Vector2.zero;
+        headRB.angularVelocity = 0;
         headTrans.parent = headParent;
         headTrans.localRotation = Quaternion.Euler(Vector3.zero);
         headTrans.localPosition = startHeadPos;
-        armSprite.localRotation = Quaternion.Euler(Vector3.zero);
+    }
+
+    void CheckForHead() {
+        if (Physics2D.OverlapCircle(transform.position, 1f, headLayer)) {
+            ResetHeadPosition();
+            currentRobotState = RobotState.moving;
+        }
 
     }
 

@@ -37,4 +37,5 @@ public class UIController : MonoBehaviour
         teleportRechargeImage.rectTransform.localScale = imageScale;
 
     }
+
 }

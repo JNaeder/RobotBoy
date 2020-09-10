@@ -76,8 +76,6 @@ public class Trajectory : MonoBehaviour
 
 
     }
-
-
     public void Show() {
         pixelParent.gameObject.SetActive(true);
 

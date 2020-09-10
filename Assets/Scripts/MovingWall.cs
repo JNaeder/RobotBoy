@@ -37,20 +37,20 @@ public class MovingWall : MonoBehaviour
         {
             if (movingToMax)
             {
-                MoveWallUp();
+                MoveWall(Vector3.up, endPointMax, MovingDirection.vertical);
             }
             else
             {
-                MoveWallDown();
+                MoveWall(Vector3.down, endPointMin, MovingDirection.vertical);
             }
         }
         else if (movingDirection == MovingDirection.horizontal) {
             if (movingToMax)
             {
-                MoveWallRight();
+                MoveWall(Vector3.right, endPointMax, MovingDirection.horizontal);
             }
             else {
-                MoveWallLeft();
+                MoveWall(Vector3.left, endPointMin, MovingDirection.horizontal);
             }
 
         }
@@ -59,7 +59,43 @@ public class MovingWall : MonoBehaviour
 
     }
 
-    void MoveWall(Vector3 direction, Transform endPoint) {
+    void MoveWall(Vector3 direction, Transform endPoint, MovingDirection moveDir) {
+        wallObject.transform.position += direction * moveSpeed * Time.deltaTime;
+        parentPoint.transform.position += direction * moveSpeed * Time.deltaTime;
+
+        if (moveDir == MovingDirection.horizontal) {
+            if (movingToMax)
+            {
+                if (wallObject.transform.position.x >= endPoint.position.x - sizeOfWall)
+                {
+                    movingToMax = !movingToMax;
+                }
+            }
+            else {
+                if (wallObject.transform.position.x <= endPoint.position.x + sizeOfWall)
+                {
+                    movingToMax = !movingToMax;
+                }
+            }
+
+        } else if(moveDir == MovingDirection.vertical)
+        {
+            if (movingToMax)
+            {
+                if (wallObject.transform.position.y >= endPoint.position.y - sizeOfWall)
+                {
+                    movingToMax = !movingToMax;
+                }
+            }
+            else {
+                if (wallObject.transform.position.y <= endPoint.position.y + sizeOfWall)
+                {
+                    movingToMax = !movingToMax;
+                }
+            }
+
+        }
+
 
 
 
@@ -79,51 +115,6 @@ public class MovingWall : MonoBehaviour
 
         }
 
-
-    }
-
-    void MoveWallDown()
-    {
-        wallObject.transform.position -= Vector3.up * moveSpeed * Time.deltaTime;
-        if (movingDirection == MovingDirection.horizontal)
-        {
-            parentPoint.transform.position -= Vector3.up * moveSpeed * Time.deltaTime;
-        }
-
-        if (wallObject.transform.position.y <= endPointMin.position.y + sizeOfWall)
-        {
-            movingToMax = true;
-
-        }
-
-    }
-
-    void MoveWallRight() {
-        wallObject.transform.position += Vector3.right * moveSpeed * Time.deltaTime;
-        if (movingDirection == MovingDirection.horizontal)
-        {
-            parentPoint.transform.position += Vector3.right * moveSpeed * Time.deltaTime;
-        }
-
-        if (wallObject.transform.position.x >= endPointMax.position.x - sizeOfWall)
-        {
-            movingToMax = false;
-
-        }
-    }
-
-    void MoveWallLeft() {
-        wallObject.transform.position -= Vector3.right * moveSpeed * Time.deltaTime;
-        if (movingDirection == MovingDirection.horizontal)
-        {
-            parentPoint.transform.position -= Vector3.right * moveSpeed * Time.deltaTime;
-        }
-
-        if (wallObject.transform.position.x <= endPointMin.position.x + sizeOfWall)
-        {
-            movingToMax = true;
-
-        }
 
     }
 }
