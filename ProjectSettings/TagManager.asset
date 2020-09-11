@@ -7,6 +7,7 @@ TagManager:
   - Horizontal Platform
   - TheSquisher
   - ElectricWalls
+  - Object
   layers:
   - Default
   - TransparentFX
