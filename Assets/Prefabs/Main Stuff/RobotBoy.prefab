@@ -243,6 +243,9 @@ MonoBehaviour:
   maxTeleportPower: 10
   currentTeleportPower: 0
   teleportRechargeRate: 5
+  headLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   currentRobotState: 0
   trajectory: {fileID: 0}
   teleportPS: {fileID: 7476835727027931590, guid: ecea1268266a94aad82cd85ddabc2720, type: 3}
@@ -270,11 +273,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562d86a11aa4a9940a8960e2b360ae15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorPoint: {fileID: 0}
+  floorPoint: {fileID: 983739129}
   floorMask:
     serializedVersion: 2
-    m_Bits: 0
-  floorCheckRadius: 0.5
+    m_Bits: 2615
+  horizontalPlatformLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  floorCheckRadius: 0.3
 --- !u!1 &2189253097184011719
 GameObject:
   m_ObjectHideFlags: 0
