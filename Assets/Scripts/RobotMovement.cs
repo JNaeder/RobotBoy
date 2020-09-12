@@ -223,12 +223,14 @@ public class RobotMovement : MonoBehaviour
 
             //Use half of the heads velocity
             rB.velocity = headRB.velocity * 0.75f;
+            Vector2 headVel = headRB.velocity;
 
             // Play the particle system for teleporting. And delete it once it's finished playing.
             GameObject pS = Instantiate(teleportPS, headTrans.position, Quaternion.identity) as GameObject;
             Destroy(pS, pS.GetComponent<ParticleSystem>().main.duration);
 
             // Reset the head and put it back on the body once teleporting has finished
+            
             headRB.bodyType = RigidbodyType2D.Kinematic;
             headRB.velocity = Vector2.zero;
             headRB.angularVelocity = 0;
@@ -237,8 +239,10 @@ public class RobotMovement : MonoBehaviour
             headTrans.localPosition = startHeadPos;
             headTrans.rotation = Quaternion.Euler(Vector3.zero);
 
+            transform.localScale = new Vector3(Mathf.Clamp(headVel.x,-1,1), 1, 1);
 
-        
+
+
     }
 
     void Reset() {
@@ -248,6 +252,7 @@ public class RobotMovement : MonoBehaviour
         headRB.angularVelocity = 0;
         bodyTrans.localPosition = startBodyPos;
         headTrans.localPosition = startHeadPos;
+        headTrans.localScale = bodyTrans.localScale;
         headTrans.rotation = Quaternion.Euler(Vector3.zero);
 
 
@@ -287,6 +292,7 @@ public class RobotMovement : MonoBehaviour
         headRB.velocity = Vector2.zero;
         headRB.angularVelocity = 0;
         headTrans.parent = headParent;
+        headTrans.localScale = bodyTrans.localScale;
         headTrans.localRotation = Quaternion.Euler(Vector3.zero);
         headTrans.localPosition = startHeadPos;
     }
