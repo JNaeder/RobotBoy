@@ -48,6 +48,10 @@ public class RobotMovement : MonoBehaviour
     public Trajectory trajectory;
     public GameObject teleportPS;
 
+    //Death Prefabs
+    public GameObject electricDeath;
+    public GameObject squishDeath;
+
     private void Start()
     {
         //Set up all these things
@@ -224,7 +228,6 @@ public class RobotMovement : MonoBehaviour
         //Use half of the heads velocity
         rB.velocity = headRB.velocity * 0.75f;
         Vector2 headVel = headRB.velocity;
-        Debug.Log(headVel);
 
         // Play the particle system for teleporting. And delete it once it's finished playing.
         GameObject pS = Instantiate(teleportPS, headTrans.position, Quaternion.identity) as GameObject;
@@ -319,6 +322,26 @@ public class RobotMovement : MonoBehaviour
     public void Die(DeathMethod theDeathMethod)
     {
         Debug.Log("Death by " + theDeathMethod);
+        Vector3 newPos = (bodyTrans.position + headTrans.position) / 2;
+
+        if (theDeathMethod == DeathMethod.electric)
+        {
+            Instantiate(electricDeath, newPos, Quaternion.identity);
+        }
+        else if (theDeathMethod == DeathMethod.squish)
+        {
+            Instantiate(squishDeath, newPos, Quaternion.identity);
+        }
+        StartCoroutine(ResetLevel());
+
+
+        gameObject.SetActive(false);
+        
+    }
+
+    IEnumerator ResetLevel() {
+        yield return new WaitForSeconds(5);
+        Debug.Log("Reset Level");
 
 
     }
