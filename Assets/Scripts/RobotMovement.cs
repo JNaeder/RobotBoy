@@ -26,7 +26,7 @@ public class RobotMovement : MonoBehaviour
 
 
     // Different States Of the Throwing Mechanic
-    public enum RobotState {moving, throwing, detached, teleporting}
+    public enum RobotState {moving, throwing, detached, teleporting, dead}
     public RobotState currentRobotState = RobotState.moving;
 
     //Different Ways Of Dying
@@ -122,8 +122,6 @@ public class RobotMovement : MonoBehaviour
 
     //Throwing State
     void Throwing() {
-
-
         if (Input.GetMouseButton(0)) {
             
             // Get the current mouse position and keep updating it
@@ -146,30 +144,19 @@ public class RobotMovement : MonoBehaviour
                 trajectory.Show();
                 trajectory.UpdateDots(headTrans.position, throwVector);
             }
-
-            
         }
-
         if (Input.GetMouseButtonUp(0)) {
-
             // Throw the head and change state to detached
             ThrowHead(throwVector);
             currentRobotState = RobotState.detached;
-
             ResetArmPosition();
-            
         }
-
-
         if (Input.GetMouseButtonDown(1)) {
             //Cancel the throwing, and go back to normal moving
             currentRobotState = RobotState.moving;
             trajectory.Hide();
-
             ResetArmPosition();
             ResetHeadPosition();
-            
-
         }
     }
 
@@ -326,16 +313,23 @@ public class RobotMovement : MonoBehaviour
 
         if (theDeathMethod == DeathMethod.electric)
         {
-            Instantiate(electricDeath, newPos, Quaternion.identity);
-        }
-        else if (theDeathMethod == DeathMethod.squish)
-        {
-            Instantiate(squishDeath, newPos, Quaternion.identity);
+            if (currentRobotState != RobotState.detached)
+            {
+                Instantiate(electricDeath, newPos, Quaternion.identity);
+                gameObject.SetActive(false);
+            }
+            else {
+                Instantiate(electricDeath, headTrans.position, Quaternion.identity);
+                headTrans.gameObject.SetActive(false);
+                currentRobotState = RobotState.dead;
+
+            }
+
         }
         StartCoroutine(ResetLevel());
 
 
-        gameObject.SetActive(false);
+        
         
     }
 
