@@ -240,3 +240,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 069c7f7b63d1448248c1d8811fa66034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  possibleObjects:
+  - {fileID: 7867862399406321613, guid: 89853662ff92f47148206c3aba5ffe91, type: 3}
+  - {fileID: 7928889236915368116, guid: 6ddbffe053afc4c0ca7f72d6babb9190, type: 3}
+  spawnLocation: {fileID: 7593810458129380704}
+  spawnedObjectParent: {fileID: 0}
+  spawnRate: 1
+  isDispensing: 1

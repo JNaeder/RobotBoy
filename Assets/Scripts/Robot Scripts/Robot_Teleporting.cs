@@ -95,6 +95,7 @@ public class Robot_Teleporting : MonoBehaviour
         main.headTrans.localPosition = main.startHeadPos;
         main.headTrans.localScale = main.bodyTrans.localScale;
         main.headTrans.rotation = Quaternion.Euler(Vector3.zero);
+        main.headTrans.GetComponent<DeathDetector>().enabled = false;
     }
 
     // Increasing the teleport power back to max. Over recharge rate time

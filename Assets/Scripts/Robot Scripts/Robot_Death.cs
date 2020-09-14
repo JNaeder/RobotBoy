@@ -7,6 +7,9 @@ public class Robot_Death : MonoBehaviour
     //--Robot Stuff--
     Robot_Main main;
 
+    //--Other Stuff--
+    GameManager gM;
+
     //--Death Prefabs
     public GameObject electricHead, electricBody;
     public GameObject squishedHead, squishedBody;
@@ -18,10 +21,14 @@ public class Robot_Death : MonoBehaviour
     void Start()
     {
         main = GetComponent<Robot_Main>();
+
+        gM = FindObjectOfType<GameManager>();
     }
 
     public void Die(DeathMethod theDeathMethod, GameObject theObject)
     {
+        gM.PlayerDeath();
+
         main.currentRobotState = Robot_Main.RobotState.dead;
         if (theDeathMethod == DeathMethod.electric)
         {

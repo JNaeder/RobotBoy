@@ -7,19 +7,15 @@ public class DeathDetector : MonoBehaviour
     //--Robot Stuff--
     Robot_Main main;
     Robot_Death death;
+    
 
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
         //--Setup Robot Stuff
-        main = GetComponentInParent<Robot_Main>();
-        death = GetComponentInParent<Robot_Death>();
+        main = FindObjectOfType<Robot_Main>();
+        death = FindObjectOfType<Robot_Death>();
     }
-
-
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //CheckSquisher
@@ -33,7 +29,5 @@ public class DeathDetector : MonoBehaviour
         {
             death.Die(Robot_Death.DeathMethod.electric, gameObject);
         }
-
-
     }
 }

@@ -36,7 +36,10 @@ public class MyButton : MonoBehaviour
             }
         }
         else {
-            ButtonUp();
+            if (isMomentary)
+            {
+                ButtonUp();
+            }
         }
     }
 

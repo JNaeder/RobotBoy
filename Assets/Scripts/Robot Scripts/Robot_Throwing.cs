@@ -109,6 +109,7 @@ public class Robot_Throwing : MonoBehaviour
         main.headRB.AddForce(throwVector, ForceMode2D.Impulse);
         main.headRB.AddTorque(Mathf.Clamp(throwVector.x, -2f, 2f) * -throwVector.magnitude);
         main.headTrans.parent = null;
+        main.headTrans.GetComponent<DeathDetector>().enabled = true;
 
     }
     //Put the arm back
@@ -127,6 +128,7 @@ public class Robot_Throwing : MonoBehaviour
         main.headTrans.localScale = main.bodyTrans.localScale;
         main.headTrans.localRotation = Quaternion.Euler(Vector3.zero);
         main.headTrans.localPosition = main.startHeadPos;
+        main.headTrans.GetComponent<DeathDetector>().enabled = false;
     }
 
     public void CheckForHead()
