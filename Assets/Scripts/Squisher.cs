@@ -85,12 +85,6 @@ public class Squisher : MonoBehaviour
         {
             FlattenObject(collision.gameObject.GetComponent<SpriteRenderer>().color, collision.gameObject);
         }
-
-        if (collision.gameObject.tag == "Player") {
-            RobotMovement playerObject = collision.gameObject.GetComponent<RobotMovement>();
-            playerObject.Die(RobotMovement.DeathMethod.squish);
-
-        }
     }
 
     void FlattenObject(Color objectColor, GameObject go) {

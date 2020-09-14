@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: 4554652066424272243
     second: RobotBoy_2_SquishDeath
+  - first:
+      213: -480946167973479375
+    second: RobotBoy_2_Deaths_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -98,10 +101,10 @@ TextureImporter:
       name: RobotBoy_2_Electric Death
       rect:
         serializedVersion: 2
-        x: 5
-        y: 0
-        width: 27
-        height: 32
+        x: 9
+        y: 15
+        width: 19
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,6 +135,27 @@ TextureImporter:
       bones: []
       spriteID: 375b7be3cef553f30800000000000000
       internalID: 4554652066424272243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RobotBoy_2_Deaths_2
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 0
+        width: 27
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13cfad522065359f0800000000000000
+      internalID: -480946167973479375
       vertices: []
       indices: 
       edges: []

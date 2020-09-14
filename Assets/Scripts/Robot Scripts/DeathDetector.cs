@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class DeathDetector : MonoBehaviour
 {
-    RobotMovement robotPlayer;
+    //--Robot Stuff--
+    Robot_Main main;
+    Robot_Death death;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        robotPlayer = GetComponentInParent<RobotMovement>();
+        //--Setup Robot Stuff
+        main = GetComponentInParent<Robot_Main>();
+        death = GetComponentInParent<Robot_Death>();
     }
 
 
@@ -20,13 +25,13 @@ public class DeathDetector : MonoBehaviour
         //CheckSquisher
         if (collision.gameObject.tag == "TheSquisher")
         {
-            robotPlayer.Die(RobotMovement.DeathMethod.squish);
+            death.Die(Robot_Death.DeathMethod.squish, gameObject);
         }
 
         //Check Electric Wall
         if (collision.gameObject.tag == "ElectricWalls")
         {
-            robotPlayer.Die(RobotMovement.DeathMethod.electric);
+            death.Die(Robot_Death.DeathMethod.electric, gameObject);
         }
 
 

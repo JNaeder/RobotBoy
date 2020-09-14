@@ -17,6 +17,8 @@ public class Robot_Throwing : MonoBehaviour
     // Min and Max Trajectory Magnitudes
     public float trajectoryMin, trajectoryMax;
     public Trajectory trajectory;
+    // Head Layer, for picking up head
+    public LayerMask headLayer;
 
 
     private void Start()
@@ -88,12 +90,12 @@ public class Robot_Throwing : MonoBehaviour
         float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
         if (diff.x > 0)
         {
-            //armSprite.localRotation = Quaternion.Euler(new Vector3(0, 0, angle + 180));
+            main.armSprite.localRotation = Quaternion.Euler(new Vector3(0, 0, angle + 180));
             transform.localScale = new Vector3(1, 1, 1);
         }
         else if (diff.x < 0)
         {
-            //armSprite.localRotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
+            main.armSprite.localRotation = Quaternion.Euler(new Vector3(0, 0, angle + 90));
             transform.localScale = new Vector3(-1, 1, 1);
         }
     }
@@ -125,5 +127,14 @@ public class Robot_Throwing : MonoBehaviour
         main.headTrans.localScale = main.bodyTrans.localScale;
         main.headTrans.localRotation = Quaternion.Euler(Vector3.zero);
         main.headTrans.localPosition = main.startHeadPos;
+    }
+
+    public void CheckForHead()
+    {
+        if (Physics2D.OverlapCircle(transform.position, 1f, headLayer))
+        {
+            ResetHeadPosition();
+            main.currentRobotState = Robot_Main.RobotState.moving;
+        }
     }
 }

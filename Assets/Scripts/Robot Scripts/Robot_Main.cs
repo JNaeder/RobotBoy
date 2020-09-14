@@ -3,28 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Robot_Main : MonoBehaviour
-{   //Robot Stuff
+{   //--Robot Stuff--
     Robot_Movement movement;
     Robot_Throwing throwing;
+    Robot_Teleporting teleporting;
 
 
-    //Other Stuff
+    //--Other Stuff--
     [HideInInspector]public Animator anim;
     [HideInInspector]public Rigidbody2D rB;
 
 
-    //Initla States
+    //--Initla States--
     [HideInInspector]public Vector3 startBodyPos, startHeadPos;
 
 
-    // Different States Of the Throwing Mechanic
+    //--Different States Of the Throwing Mechanic--
     public enum RobotState { moving, throwing, detached, teleporting, dead }
     public RobotState currentRobotState = RobotState.moving;
 
 
-    // Transform of the body and the head
+    //--Transform of the body and the head--
     public Transform bodyTrans, headTrans, headParent, armSprite, headHolder;
-    // The rigidbody of the head
+    //--The rigidbody of the head--
     public Rigidbody2D headRB;
 
     private void Start()
@@ -32,6 +33,7 @@ public class Robot_Main : MonoBehaviour
         //Set Robot Scripts
         movement = GetComponent<Robot_Movement>();
         throwing = GetComponent<Robot_Throwing>();
+        teleporting = GetComponent<Robot_Teleporting>();
 
         // Set Things Up
         rB = GetComponent<Rigidbody2D>();
@@ -44,6 +46,7 @@ public class Robot_Main : MonoBehaviour
     private void Update()
     {
         SetStateStatus();
+        teleporting.RechargeTeleportPower();
     }
 
     private void SetStateStatus()
@@ -60,8 +63,12 @@ public class Robot_Main : MonoBehaviour
         }
         else if (currentRobotState == RobotState.detached)
         {
-            //StartCoroutine(Detached());
-            //Movement();
+            StartCoroutine(teleporting.Detached());
+            movement.Moving();
+        }
+        else if (currentRobotState == RobotState.dead) {
+
+            //Death Stuff
         }
     }
 }
