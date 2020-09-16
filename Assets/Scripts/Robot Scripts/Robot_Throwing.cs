@@ -16,6 +16,9 @@ public class Robot_Throwing : MonoBehaviour
     //--Public stuff--
     // Min and Max Trajectory Magnitudes
     public float trajectoryMin, trajectoryMax;
+    // The Multiplier for viewport
+    [Range(0f, 50f)]
+    public float viewportMultipler = 1f;
     public Trajectory trajectory;
     // Head Layer, for picking up head
     public LayerMask headLayer;
@@ -36,7 +39,7 @@ public class Robot_Throwing : MonoBehaviour
         {
             main.currentRobotState = Robot_Main.RobotState.throwing;
             // Get the start mouse position
-            startMousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            startMousePos = cam.ScreenToViewportPoint(Input.mousePosition) * viewportMultipler;
         }
     }
 
@@ -47,7 +50,7 @@ public class Robot_Throwing : MonoBehaviour
         {
 
             //Get the current mouse position and keep updating it
-            currentMousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            currentMousePos = cam.ScreenToViewportPoint(Input.mousePosition) * viewportMultipler;
 
             //Set Arm rotation
             SetThrowingArmAngle(currentMousePos);

@@ -66,7 +66,9 @@ public class Robot_Death : MonoBehaviour
 
     void SpawnDeadObject(GameObject currentObject,GameObject deadObject, Vector2 spawnPos)
     {
-        Instantiate(deadObject, spawnPos, Quaternion.identity);
+        GameObject newObject = Instantiate(deadObject, spawnPos, Quaternion.identity) as GameObject;
+        newObject.transform.localRotation = currentObject.transform.localRotation;
+
         currentObject.SetActive(false);
     }
 }
