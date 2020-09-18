@@ -29,5 +29,11 @@ public class DeathDetector : MonoBehaviour
         {
             death.Die(Robot_Death.DeathMethod.electric, gameObject);
         }
+
+        //Check Object Destroyer
+        if (collision.gameObject.tag == "Object Destroyer") {
+
+            death.Die(Robot_Death.DeathMethod.destroy, gameObject);
+        }
     }
 }

@@ -15,7 +15,7 @@ public class Robot_Death : MonoBehaviour
     public GameObject squishedHead, squishedBody;
 
     //--Different Ways Of Dying--
-    public enum DeathMethod { electric, squish };
+    public enum DeathMethod { electric, squish, destroy };
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +38,12 @@ public class Robot_Death : MonoBehaviour
         {
             SquishDeath(theObject);
         }
+        else if (theDeathMethod == DeathMethod.destroy)
+        {
+            DestroyDeath(theObject);
+        }
+
+
     }
 
     void ElectricDeath(GameObject _theObject) {
@@ -62,6 +68,14 @@ public class Robot_Death : MonoBehaviour
         {
             SpawnDeadObject(_theObject,squishedHead, main.headTrans.position);
         }
+    }
+
+    void DestroyDeath(GameObject _theObject) {
+        _theObject.SetActive(false);
+
+        //Maybe put a particle system or something here? 
+
+
     }
 
     void SpawnDeadObject(GameObject currentObject,GameObject deadObject, Vector2 spawnPos)

@@ -8,6 +8,7 @@ TagManager:
   - TheSquisher
   - ElectricWalls
   - Object
+  - Object Destroyer
   layers:
   - Default
   - TransparentFX

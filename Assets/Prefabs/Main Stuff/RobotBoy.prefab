@@ -129,7 +129,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385437622246945923}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2168cf8300ec46f418a99c1088d70376, type: 3}
   m_Name: 
@@ -201,7 +201,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &385437622386422977
 Rigidbody2D:
@@ -292,7 +292,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trajectoryMin: 2
-  trajectoryMax: 15
+  trajectoryMax: 20
+  viewportMultipler: 40
   trajectory: {fileID: 0}
   headLayer:
     serializedVersion: 2
@@ -325,6 +326,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7cff4c78f99484488c40a8d2aa79d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  electricHead: {fileID: 5145163922949403082, guid: 5bebde85d72814c7cb777b74bf5972dc, type: 3}
+  electricBody: {fileID: 380636347381955328, guid: 6a13ebb0cedfd4afb9b229674cd3d7d8, type: 3}
+  squishedHead: {fileID: 5029926687156621395, guid: b3117081b25d64076abded4daf8ff7ba, type: 3}
+  squishedBody: {fileID: 2743361422695782725, guid: 2883e173fee314551b27351ffc2c88ec, type: 3}
 --- !u!114 &9011163323831699609
 MonoBehaviour:
   m_ObjectHideFlags: 0
